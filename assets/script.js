@@ -1,6 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(function () {
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
@@ -13,6 +10,23 @@ $(function () {
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
-    $("#currentDay").text(dayjs().format("dddd, MMMM D"));
+    // $("#currentDay").text(dayjs().format("dddd, MMMM D"));
+ 
+// Get the current time using Day.js
+var now = dayjs();
+
+// Function to update the current time on the page
+function updateCurrentTime() {
+  var currentDayEl = $("#currentDay");
+  currentDayEl.text(now.format("dddd, MMMM D, h:mm A"));
+}
+
+// Call the function initially to set the current time
+updateCurrentTime();
+
+// Set an interval to update the time every second
+setInterval(function() {
+  now = dayjs(); // Update the current time
+  updateCurrentTime(); // Update the time on the page
+}, 1000);
   });
-  
