@@ -1,4 +1,26 @@
 $(function () {
+  var currentHour = dayjs().format("H");
+
+  // Loop over all time-blocks
+  $(".time-block").each(function () {
+    // Get the id of the current time-block
+    var timeBlockId = $(this).attr("id");
+  
+    // Get the hour of the current time-block by parsing the id string
+    var timeBlockHour = parseInt(timeBlockId.split("-")[1]);
+  
+    // Compare the current time-block hour to the current hour
+    if (timeBlockHour < currentHour) {
+      // Add "past" class for past
+      $(this).addClass("past");
+    } else if (timeBlockHour == currentHour) {
+      // Add"present" class for this hour
+      $(this).addClass("present");
+    } else {
+      // Otherwise, add the "future" class
+      $(this).addClass("future");
+    }
+  });
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
